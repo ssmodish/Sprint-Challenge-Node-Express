@@ -39,6 +39,15 @@ server.get('/projects/:id', (req, res) => {
 // DELETE /projectModel/:id
 
 // GET /projectActions/:id
+server.get('/projectActions/:id', (req, res) => {
+  projectModel.getProjectActions(req.params.id)
+    .then(actions => {
+      res.status(200).json(actions);
+    })
+    .catch(err => {
+      res.status(500).json(err);
+    });
+})
 
 // GET /actionModel
 server.get('/actions', (req, res) => {
