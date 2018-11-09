@@ -44,7 +44,7 @@ server.post('/projects', (req, res) => {
   } else {
     projectModel.insert(newProject)
       .then(newProjectRes => {
-        res.status(201).json({ "post": "New Project Added!" });
+        res.status(201).json({ "posted": newProjectRes });
       })
       .catch(err => {
         res.send(err);
@@ -53,6 +53,18 @@ server.post('/projects', (req, res) => {
 });
 
 // PUT /projectModel/:id
+server.put('/projects/:id', (req, res) => {
+  const { id } = req.params;
+  const updatedProject = req.body;
+
+  projectModel.update(id, updatedProject)
+    .then(updateProject => {
+      res.status(201).json({ "Project Updated": updateProject });
+    })
+    .catch(err => {
+      res.send(err);
+    });
+})
 
 
 // DELETE /projectModel/:id
@@ -112,7 +124,18 @@ server.post('/actions', (req, res) => {
 });
 
 // PUT /actionModel/:id
+server.put('/actions/:id', (req, res) => {
+  const { id } = req.params;
+  const updatedAction = req.body;
 
+  actionModel.update(id, updatedAction)
+    .then(updateAction => {
+      res.status(201).json({ "Project Updated": updateAction });
+    })
+    .catch(err => {
+      res.send(err);
+    });
+})
 
 // DELETE /actionModel/:id
 
