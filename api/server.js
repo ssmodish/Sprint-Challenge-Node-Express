@@ -66,9 +66,16 @@ server.put('/projects/:id', (req, res) => {
     });
 })
 
-
 // DELETE /projectModel/:id
-
+server.delete("/projects/:id", (req, res) => {
+  projectModel.remove(req.params.id)
+    .then(count => {
+      res.status(201).json(count)
+    })
+    .catch(err => {
+      res.status(500).json({ error: err })
+    })
+})
 
 // GET /projectActions/:id
 server.get('/projectActions/:id', (req, res) => {
@@ -138,6 +145,14 @@ server.put('/actions/:id', (req, res) => {
 })
 
 // DELETE /actionModel/:id
-
+server.delete("/actions/:id", (req, res) => {
+  actionModel.remove(req.params.id)
+    .then(count => {
+      res.status(201).json(count)
+    })
+    .catch(err => {
+      res.status(500).json({ error: err })
+    })
+})
 
 module.exports = server;
