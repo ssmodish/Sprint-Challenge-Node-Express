@@ -33,10 +33,30 @@ server.get('/projects/:id', (req, res) => {
 })
 
 // POST /projectModel
+server.post('/projects', (req, res) => {
+  const { name, description } = req.body;
+  const newProject = { name, description };
+
+  if(!newProject){
+    res
+      .status(400)
+      .json({ errorMessage: "Ya gotta give me something here" });
+  } else {
+    projectModel.insert(newProject)
+      .then(newProjectRes => {
+        res.status(201).json({ "post": "New Project Added!" });
+      })
+      .catch(err => {
+        res.send(err);
+      });
+  };
+});
 
 // PUT /projectModel/:id
 
+
 // DELETE /projectModel/:id
+
 
 // GET /projectActions/:id
 server.get('/projectActions/:id', (req, res) => {
@@ -72,8 +92,27 @@ server.get('/actions/:id', (req, res) => {
 })
 
 // POST /actionModel
+server.post('/actions', (req, res) => {
+  const { project_id, description, notes } = req.body;
+  const newAction = { project_id, description, notes };
+
+  if(!newAction){
+    res
+      .status(400)
+      .json({ errorMessage: "Ya gotta give me something here" });
+  } else {
+    actionModel.insert(newAction)
+      .then(newActionRes => {
+        res.status(201).json({ "post": "New Action Added!" });
+      })
+      .catch(err => {
+        res.send(err);
+      });
+  };
+});
 
 // PUT /actionModel/:id
+
 
 // DELETE /actionModel/:id
 
