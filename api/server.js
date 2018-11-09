@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 
 const actionModel = require('../data/helpers/actionModel.js');
@@ -7,7 +8,7 @@ const projectModel = require('../data/helpers/projectModel.js');
 
 const server = express();
 
-
+server.use(cors());
 server.use(express.json());
 
 // GET /projectModel
